@@ -9,7 +9,7 @@ const App = () => {
     <h1>Buscador de Egressos - Sistemas de Informação</h1>
     <PeoplePage />
     <footer className="footer">
-        <p>Feito por: Guilherme Scarano e Luiz Felipe</p>
+        <p>Desenvolvido por: Guilherme Scarano e Luiz Silva</p>
       </footer>
   </div>
   );

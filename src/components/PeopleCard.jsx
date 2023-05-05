@@ -8,9 +8,9 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import { Avatar, CardHeader } from "@mui/material";
 
-const PeopleCard = ({ name, idade, email, photoUrl, linkedinUrl, compartilhar}) => {
+const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, compartilhar}) => {
   return (
-    <Card sx={{ minWidth: "100%", width: "auto", height: "100%"}}>
+    <Card sx={{ width: "250px", height: "100%"}}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -22,7 +22,7 @@ const PeopleCard = ({ name, idade, email, photoUrl, linkedinUrl, compartilhar}) 
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Idade: {idade} | Email: {email}
+            Turma: {turma} | Email: {email}
           </Typography>
         </CardContent>
       </CardActionArea>

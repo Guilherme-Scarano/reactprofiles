@@ -8,9 +8,9 @@ import Typography from '@mui/material/Typography';
 
 export default function MediaCard() {
   return (
-    <Card sx={{ width: "100%", height: "200px", overflow: "hidden" }}>
+    <Card sx={{ width: "200px", height: "200px", borderRadius: "200px" }}>
       <CardMedia
-       // component='img'
+       //component='img'
         //image='https://source.unsplash.com/random'
         //alt='unsplash image'
       />
