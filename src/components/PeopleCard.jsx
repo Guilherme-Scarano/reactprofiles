@@ -8,25 +8,37 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import { Avatar, CardHeader } from "@mui/material";
 
+const img_styles = {
+  media: {
+    height: 258,
+    width: 270,
+    paddingLeft: 50,
+    paddingRight: 50,
+    paddingTop: 10
+  }
+};
+
 const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, compartilhar}) => {
   return (
-    <Card sx={{ width: "250px", height: "100%"}}>
+    <Card sx={{ minWidth: 210, maxWidth: 380, minHeight: 420 }}>
       <CardActionArea>
         <CardMedia
           component="img"
+          style={img_styles.media}
           image={photoUrl}
           alt={name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" color="blue">
+          <Typography gutterBottom variant="h5" component="div" color="blue" textAlign="center">
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Turma: {turma} | Email: {email}
+            <b>Turma:</b> {turma} <br />
+            <b>Email:</b> {email}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions sx={{ justifyContent: "center" }}>
       <a href={compartilhar} target="_blank">
     <Button size="small" color="primary">
       Compartilhar
