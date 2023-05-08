@@ -22,7 +22,7 @@ const PeoplePage = () => {
 
   return (
     <div>
-      <Grid container spacing={3} alignItems="center" justifyContent="center">
+      <Grid container spacing={3} paddingRight={"50px"} paddingTop={"50px"} paddingLeft={"50px"}>
         {peopleData.map((person, index) => (
           <Grid item xs={6} sm={4} md={4} key={index}>
             <PeopleCard
