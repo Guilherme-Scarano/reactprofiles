@@ -20,7 +20,8 @@ const img_styles = {
 
 const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, compartilhar}) => {
   return (
-    <Card sx={{ minWidth: 210, maxWidth: 380, minHeight: 420 }}>
+    <Card sx={{ minWidth: 210, maxWidth: 380, minHeight: 420 }} className="PeopleCard">
+      <a href={`mailto:${email}`} target="_blank" rel="noreferrer">
       <CardActionArea>
         <CardMedia
           component="img"
@@ -38,6 +39,7 @@ const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, compartilhar}) 
           </Typography>
         </CardContent>
       </CardActionArea>
+      </a>
       <CardActions sx={{ justifyContent: "center" }}>
       <a href={compartilhar} target="_blank">
     <Button size="small" color="primary">
