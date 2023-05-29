@@ -1,0 +1,37 @@
+{
+    "people": [
+      {
+        "name": "Matheus",
+        "turma": 2023,
+        "email": "john.doe@example.com",
+        "photoUrl": "https://avatars.githubusercontent.com/u/17969883?v=4",
+        "linkedinUrl": "https://br.linkedin.com/in/matheus-franco-34ba1019",
+        "compartilhar": "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbr.linkedin.com%2Fin%2Fmatheus-franco-34ba1019&amp;src=sdkpreparse"
+      },
+      {
+        "name": "Guilherme",
+        "turma": 2025,
+        "email": "jane.smith@example.com",
+        "photoUrl": "https://ichef.bbci.co.uk/news/640/cpsprodpb/17638/production/_124800859_gettyimages-817514614.jpg",
+        "linkedinUrl": "https://br.linkedin.com/in/guilherme-scarano-8400a425a",
+        "compartilhar": "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbr.linkedin.com%2Fin%2Fguilherme-scarano-8400a425a&amp;src=sdkpreparse"
+      },
+      {
+        "name": "Luiz Felipe",
+        "turma": 2024,
+        "email": "mark.johnson@example.com",
+        "photoUrl": "https://petcare.com.br/wp-content/uploads/2019/02/caes-ouvem-o-que-falamos.jpg",
+        "linkedinUrl": "https://br.linkedin.com/in/luiz-felipe-silva-9aa8a726b",
+        "compartilhar": "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbr.linkedin.com%2Fin%2Fluiz-felipe-silva-9aa8a726b&amp;src=sdkpreparse"
+      },
+      {
+        "name": "João",
+        "turma": 2026,
+        "email": "john.doe@example.com",
+        "photoUrl": "https://avatars.githubusercontent.com/u/17969883?v=4",
+        "linkedinUrl": "https://br.linkedin.com/in/matheus-franco-34ba1019",
+        "compartilhar": "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbr.linkedin.com%2Fin%2Fmatheus-franco-34ba1019&amp;src=sdkpreparse"
+      }
+    ]
+  }
+  
