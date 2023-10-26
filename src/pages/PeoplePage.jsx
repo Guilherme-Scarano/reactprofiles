@@ -57,8 +57,12 @@ const PeoplePage = () => {
   };
 
   const filteredData = peopleData.filter((person) => {
-    const includesSearchTerm = person.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const includesSearchTerm = person.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      person.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      person.turma.toString().includes(searchTerm);
+
     const matchesFilterYear = filterYear === "" || person.turma.toString() === filterYear;
+
     return includesSearchTerm && matchesFilterYear;
   });
 
@@ -133,7 +137,7 @@ const PeoplePage = () => {
       <div style={{ marginBottom: "20px" }}>
         <input
           type="text"
-          placeholder="Pesquisar"
+          placeholder="Pesquisar por nome, email ou turma"
           value={searchTerm}
           onChange={handleSearchChange}
           style={{
@@ -146,6 +150,7 @@ const PeoplePage = () => {
           }}
         />
       </div>
+
       <div style={{ marginBottom: "20px" }}>
         <select value={filterYear} onChange={handleFilterYearChange}>
           <option value="">Mostrar todos</option>
