@@ -14,6 +14,7 @@ const PeoplePage = () => {
     photoUrl: "",
     linkedinUrl: "",
   });
+  const [addStudentFormVisible, setAddStudentFormVisible] = useState(false);
 
   const fetchStudents = async () => {
     try {
@@ -41,6 +42,7 @@ const PeoplePage = () => {
         linkedinUrl: "",
       });
       fetchStudents();
+      setAddStudentFormVisible(false); // Oculta o formulário após o cadastro
     } catch (error) {
       console.error("Erro ao adicionar aluno:", error);
     }
@@ -62,8 +64,72 @@ const PeoplePage = () => {
 
   const turmaYears = [...new Set(peopleData.map((person) => person.turma.toString()))];
 
+  const openAddStudentForm = () => {
+    setAddStudentFormVisible(true);
+  };
+
   return (
     <div>
+      {/* Botão "Adicionar Egresso" no canto superior direito */}
+      <button
+        onClick={openAddStudentForm}
+        style={{
+          position: "fixed",
+          top: "20px",
+          right: "20px",
+          background: "blue",
+          color: "white",
+          border: "none",
+          padding: "10px 20px",
+          borderRadius: "4px",
+          cursor: "pointer",
+        }}
+      >
+        Adicionar Egresso
+      </button>
+
+      {addStudentFormVisible && (
+        // Formulário para cadastrar novos alunos
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Nome"
+            value={newStudent.name}
+            onChange={(e) => setNewStudent({ ...newStudent, name: e.target.value })}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Turma"
+            value={newStudent.turma}
+            onChange={(e) => setNewStudent({ ...newStudent, turma: e.target.value })}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={newStudent.email}
+            onChange={(e) => setNewStudent({ ...newStudent, email: e.target.value })}
+            required
+          />
+          <input
+            type="url"
+            placeholder="URL da Foto"
+            value={newStudent.photoUrl}
+            onChange={(e) => setNewStudent({ ...newStudent, photoUrl: e.target.value })}
+            required
+          />
+          <input
+            type="url"
+            placeholder="URL do LinkedIn"
+            value={newStudent.linkedinUrl}
+            onChange={(e) => setNewStudent({ ...newStudent, linkedinUrl: e.target.value })}
+            required
+          />
+          <button type="submit">Cadastrar Aluno</button>
+        </form>
+      )}
+
       <div style={{ marginBottom: "20px" }}>
         <input
           type="text"
@@ -90,46 +156,6 @@ const PeoplePage = () => {
           ))}
         </select>
       </div>
-
-      {/* Formulário para cadastrar novos alunos */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nome"
-          value={newStudent.name}
-          onChange={(e) => setNewStudent({ ...newStudent, name: e.target.value })}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Turma"
-          value={newStudent.turma}
-          onChange={(e) => setNewStudent({ ...newStudent, turma: e.target.value })}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={newStudent.email}
-          onChange={(e) => setNewStudent({ ...newStudent, email: e.target.value })}
-          required
-        />
-        <input
-          type="url"
-          placeholder="URL da Foto"
-          value={newStudent.photoUrl}
-          onChange={(e) => setNewStudent({ ...newStudent, photoUrl: e.target.value })}
-          required
-        />
-        <input
-          type="url"
-          placeholder="URL do LinkedIn"
-          value={newStudent.linkedinUrl}
-          onChange={(e) => setNewStudent({ ...newStudent, linkedinUrl: e.target.value })}
-          required
-        />
-        <button type="submit">Cadastrar Aluno</button>
-      </form>
 
       <Grid container spacing={3} paddingRight={"50px"} paddingTop={"50px"} paddingLeft={"50px"}>
         {filteredData.map((person, index) => (
