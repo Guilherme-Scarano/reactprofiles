@@ -19,7 +19,7 @@ class AddStudentForm extends Component {
     } catch (error) {
       console.error("Erro ao adicionar aluno:", error);
     }
-  }
+  };
 
   render() {
     // Renderize o formulário para adicionar alunos aqui
@@ -27,3 +27,4 @@ class AddStudentForm extends Component {
 }
 
 export default AddStudentForm;
+

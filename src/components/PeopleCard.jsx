@@ -6,18 +6,29 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
+import axios from "axios";
+
 
 const img_styles = {
   media: {
     height: 258,
     width: 270,
     paddingLeft: 50,
-    paddingRight: 50,
+    paddingRight:50,
     paddingTop: 10,
   },
 };
 
-const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl }) => {
+const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, studentId, handleDeleteStudent }) => {
+  const handleDeleteClick = async () => {
+    try {
+      await axios.delete(`http://localhost:3000/students/${studentId}`);
+      handleDeleteStudent(studentId); // Chame a função passada como prop
+    } catch (error) {
+      console.error("Erro ao excluir aluno:", error);
+    }
+  }
+
   const handleShare = async (name, url) => {
     try {
       await navigator.share({
@@ -48,6 +59,9 @@ const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl }) => {
         </CardActionArea>
       </a>
       <CardActions sx={{ justifyContent: "center" }}>
+      <Button size="small" color="secondary" onClick={() => handleDeleteClick(studentId)}>
+        Excluir
+      </Button>
         <Button size="small" color="primary" onClick={() => handleShare(name, linkedinUrl)}>
           Compartilhar
         </Button>
