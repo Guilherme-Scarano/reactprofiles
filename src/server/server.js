@@ -28,17 +28,24 @@ const saveDataToFile = (data) => {
   fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2), "utf-8");
 };
 
+// Função para gerar IDs únicos
+function generateUniqueId() {
+  return Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
+}
+
 // Rota para listar todos os alunos
 app.get("/students", (req, res) => {
   const students = readDataFromFile();
   res.json(students);
 });
 
+// Rota para adicionar um novo aluno com ID gerado automaticamente
 app.post("/students", (req, res) => {
   const newStudent = req.body;
-  const students = readDataFromFile();
-  students.push(newStudent);
-  saveDataToFile(students); // Salva os alunos atualizados no arquivo JSON
+  const id = generateUniqueId(); // Gere um ID exclusivo para o novo aluno
+  newStudent.id = id; // Adicione o ID ao objeto do aluno
+  const students = readDataFromFile(); // Leia os alunos do arquivo JSON
+  saveDataToFile([...students, newStudent]); // Salva os alunos atualizados no arquivo JSON (incluindo o novo aluno)
   res.status(201).json(newStudent);
 });
 

@@ -52,6 +52,11 @@ const PeoplePage = () => {
     setSearchTerm(event.target.value);
   };
 
+  const handleDeleteStudent = (studentId) => {
+    // Atualize a lista de alunos após a exclusão bem-sucedida
+    setPeopleData((prevData) => prevData.filter((person) => person.id !== studentId));
+  };
+
   const handleFilterYearChange = (event) => {
     setFilterYear(event.target.value);
   };
@@ -172,6 +177,8 @@ const PeoplePage = () => {
               photoUrl={person.photoUrl}
               linkedinUrl={person.linkedinUrl}
               compartilhar={person.compartilhar}
+              studentId={person.id}
+              handleDeleteStudent={handleDeleteStudent}
             />
           </Grid>
         ))}
