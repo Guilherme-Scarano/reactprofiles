@@ -45,7 +45,7 @@ const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, studentId, hand
   return (
     <Card sx={{ minWidth: 210, maxWidth: 380, minHeight: 420 }} className="PeopleCard">
       <a href={`mailto:${email}`} target="_blank" rel="noreferrer">
-        <CardActionArea>
+        <CardActionArea title="Clique para enviar e-mail">
           <CardMedia component="img" style={img_styles.media} image={photoUrl} alt={name} />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div" color="blue" textAlign="center">
