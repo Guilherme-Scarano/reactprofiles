@@ -48,6 +48,26 @@ const PeoplePage = () => {
     }
   };
 
+  const handleEditStudent = async (studentId, updateData) => {
+    try {
+      // Realize uma solicitação PUT para o servidor para atualizar as informações do aluno
+      const response = await axios.put(`http://localhost:3000/students/${studentId}`, updateData);
+  
+      // Atualize a lista de alunos após a edição bem-sucedida
+      const updatedData = peopleData.map((person) => {
+        if (person.id === studentId) {
+          return response.data; // Use os novos dados do servidor
+        }
+        return person;
+      });
+  
+      setPeopleData(updatedData);
+    } catch (error) {
+      console.error("Erro ao editar aluno:", error);
+    }
+  };
+  
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -179,6 +199,7 @@ const PeoplePage = () => {
               compartilhar={person.compartilhar}
               studentId={person.id}
               handleDeleteStudent={handleDeleteStudent}
+              handleEditStudent={handleEditStudent}
             />
           </Grid>
         ))}

@@ -1,14 +1,6 @@
 [
   {
-    "name": "Bad Fallen",
-    "turma": "2017",
-    "email": "fallenInsider@gmail.com",
-    "photoUrl": "https://th.bing.com/th/id/OIP.ADnMEfRzi0VLTAvVWzFVVwHaJ5?pid=ImgDet&rs=1",
-    "linkedinUrl": "https://br.linkedin.com/in/jaimepadua",
-    "id": "uhserptoqzflocc0jz4"
-  },
-  {
-    "name": "Fallen Prime",
+    "name": "Fallen Pós Major",
     "turma": "2018",
     "email": "fallenprime@gmail.com",
     "photoUrl": "https://th.bing.com/th/id/OIP.EhTrxSu_BLewB4nvonW7jQHaE8?pid=ImgDet&rs=1",
@@ -16,11 +8,19 @@
     "id": "u4lzdisfc8locc3m9c"
   },
   {
-    "name": "Fernando",
+    "name": "Fer",
     "turma": "2016",
     "email": "fernando@gmail.com",
     "photoUrl": "https://cdn.espn.com.br/image/wide/622_158b2857-edbe-3b20-8a48-7ccae890b883.jpg",
     "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
     "id": "le7vr0td8elodd11up"
+  },
+  {
+    "name": "Professor",
+    "turma": "2013",
+    "email": "confianoverdadeiro@gmail.com",
+    "photoUrl": "https://th.bing.com/th/id/OIP.ADnMEfRzi0VLTAvVWzFVVwHaJ5?pid=ImgDet&rs=1",
+    "linkedinUrl": "https://www.linkedin.com/in/linustorvalds",
+    "id": "hxm6qnpdz24loma2xtn"
   }
 ]

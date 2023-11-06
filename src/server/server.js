@@ -56,8 +56,9 @@ app.put("/students/:id", (req, res) => {
 
   const studentIndex = students.findIndex((student) => student.id === id);
   if (studentIndex !== -1) {
+    // Atualize as informações do aluno
     students[studentIndex] = updatedStudent;
-    saveDataToFile(students); // Salva os alunos atualizados no arquivo JSON
+    saveDataToFile(students); // Salve os alunos atualizados no arquivo JSON
     res.json(updatedStudent);
   } else {
     res.status(404).json({ error: "Aluno não encontrado" });
