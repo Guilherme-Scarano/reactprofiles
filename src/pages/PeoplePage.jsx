@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import PeopleCard from "../components/PeopleCard";
 import axios from "axios";
+import LoginPage from "../components/LoginPage";
 
 const PeoplePage = () => {
   const [peopleData, setPeopleData] = useState([]);
@@ -15,6 +16,7 @@ const PeoplePage = () => {
     linkedinUrl: "",
   });
   const [addStudentFormVisible, setAddStudentFormVisible] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const fetchStudents = async () => {
     try {
@@ -52,7 +54,7 @@ const PeoplePage = () => {
     try {
       // Realize uma solicitação PUT para o servidor para atualizar as informações do aluno
       const response = await axios.put(`http://localhost:3000/students/${studentId}`, updateData);
-  
+
       // Atualize a lista de alunos após a edição bem-sucedida
       const updatedData = peopleData.map((person) => {
         if (person.id === studentId) {
@@ -60,13 +62,12 @@ const PeoplePage = () => {
         }
         return person;
       });
-  
+
       setPeopleData(updatedData);
     } catch (error) {
       console.error("Erro ao editar aluno:", error);
     }
   };
-  
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -85,10 +86,10 @@ const PeoplePage = () => {
     const includesSearchTerm = person.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       person.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       person.turma.toString().includes(searchTerm);
-
+  
     const matchesFilterYear = filterYear === "" || person.turma.toString() === filterYear;
-
-    return includesSearchTerm && matchesFilterYear;
+  
+    return includesSearchTerm && matchesFilterYear; // Correção do operador
   });
 
   const turmaYears = [...new Set(peopleData.map((person) => person.turma.toString()))];
@@ -99,23 +100,45 @@ const PeoplePage = () => {
 
   return (
     <div>
-      {/* Botão "Adicionar Egresso" no canto superior direito */}
-      <button
-        onClick={openAddStudentForm}
-        style={{
-          position: "fixed",
-          top: "20px",
-          right: "20px",
-          background: "blue",
-          color: "white",
-          border: "none",
-          padding: "10px 20px",
-          borderRadius: "4px",
-          cursor: "pointer",
-        }}
-      >
-        Adicionar Egresso
-      </button>
+      {isLoggedIn ? (
+        <button
+          onClick={() => setIsLoggedIn(false)} // Adicione o botão de sair (logout)
+          style={{
+            background: "red",
+            color: "white",
+            border: "none",
+            padding: "10px 20px",
+            borderRadius: "4px",
+            cursor: "pointer",
+            position: "fixed",
+            top: "20px",
+            left: "20px",
+          }}
+        >
+          Sair
+        </button>
+      ) : (
+        <LoginPage setIsLoggedIn={setIsLoggedIn} />
+      )}
+
+      {isLoggedIn && (
+        <button
+          onClick={openAddStudentForm}
+          style={{
+            position: "fixed",
+            top: "20px",
+            right: "20px",
+            background: "blue",
+            color: "white",
+            border: "none",
+            padding: "10px 20px",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
+        >
+          Adicionar Egresso
+        </button>
+      )}
 
       {addStudentFormVisible && (
         // Formulário para cadastrar novos alunos
@@ -159,6 +182,7 @@ const PeoplePage = () => {
         </form>
       )}
 
+      {/* Resto do seu código de exibição da página */}
       <div style={{ marginBottom: "20px" }}>
         <input
           type="text"
@@ -200,6 +224,7 @@ const PeoplePage = () => {
               studentId={person.id}
               handleDeleteStudent={handleDeleteStudent}
               handleEditStudent={handleEditStudent}
+              isLoggedIn={isLoggedIn}
             />
           </Grid>
         ))}
