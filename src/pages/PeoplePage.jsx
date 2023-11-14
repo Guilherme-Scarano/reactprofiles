@@ -44,7 +44,7 @@ const PeoplePage = () => {
         linkedinUrl: "",
       });
       fetchStudents();
-      setAddStudentFormVisible(false); // Oculta o formulário após o cadastro
+      setAddStudentFormVisible(false);
     } catch (error) {
       console.error("Erro ao adicionar aluno:", error);
     }
@@ -52,13 +52,11 @@ const PeoplePage = () => {
 
   const handleEditStudent = async (studentId, updateData) => {
     try {
-      // Realize uma solicitação PUT para o servidor para atualizar as informações do aluno
       const response = await axios.put(`http://localhost:3000/students/${studentId}`, updateData);
 
-      // Atualize a lista de alunos após a edição bem-sucedida
       const updatedData = peopleData.map((person) => {
         if (person.id === studentId) {
-          return response.data; // Use os novos dados do servidor
+          return response.data;
         }
         return person;
       });
@@ -74,7 +72,6 @@ const PeoplePage = () => {
   };
 
   const handleDeleteStudent = (studentId) => {
-    // Atualize a lista de alunos após a exclusão bem-sucedida
     setPeopleData((prevData) => prevData.filter((person) => person.id !== studentId));
   };
 
@@ -83,13 +80,14 @@ const PeoplePage = () => {
   };
 
   const filteredData = peopleData.filter((person) => {
-    const includesSearchTerm = person.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    const includesSearchTerm =
+      person.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       person.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       person.turma.toString().includes(searchTerm);
-  
+
     const matchesFilterYear = filterYear === "" || person.turma.toString() === filterYear;
-  
-    return includesSearchTerm && matchesFilterYear; // Correção do operador
+
+    return includesSearchTerm && matchesFilterYear;
   });
 
   const turmaYears = [...new Set(peopleData.map((person) => person.turma.toString()))];
@@ -102,7 +100,7 @@ const PeoplePage = () => {
     <div>
       {isLoggedIn ? (
         <button
-          onClick={() => setIsLoggedIn(false)} // Adicione o botão de sair (logout)
+          onClick={() => setIsLoggedIn(false)}
           style={{
             background: "red",
             color: "white",
@@ -141,7 +139,6 @@ const PeoplePage = () => {
       )}
 
       {addStudentFormVisible && (
-        // Formulário para cadastrar novos alunos
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -182,7 +179,6 @@ const PeoplePage = () => {
         </form>
       )}
 
-      {/* Resto do seu código de exibição da página */}
       <div style={{ marginBottom: "20px" }}>
         <input
           type="text"

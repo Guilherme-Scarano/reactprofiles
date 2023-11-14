@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require("fs");
-const jwt = require("jsonwebtoken");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -10,34 +9,13 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Chave secreta para assinar o token JWT (deve ser mantida em segredo em um ambiente de produção)
-const secretKey = "secreto";
-
-// Função para criar um token JWT
-function createToken() {
-  const token = jwt.sign({}, secretKey, { expiresIn: "1h" });
-  return token;
-}
-
-// Middleware de verificação do token JWT
-function verifyToken(req, res, next) {
-  const token = req.header("Authorization");
-
-  if (!token) {
-    return res.status(403).json({ error: "Token não fornecido" });
-  }
-
-  jwt.verify(token, secretKey, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ error: "Token inválido" });
-    }
-    req.user = decoded;
-    next();
-  });
-}
-
 // Nome do arquivo JSON para armazenar os alunos
 const dataFilePath = "students.json";
+
+// Função para gerar IDs únicos
+function generateUniqueId() {
+  return Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
+}
 
 // Função para ler os dados do arquivo JSON
 const readDataFromFile = () => {
@@ -62,7 +40,7 @@ app.get("/students", (req, res) => {
 });
 
 // Rota para adicionar um novo aluno com ID gerado automaticamente
-app.post("/students", verifyToken, (req, res) => {
+app.post("/students", (req, res) => {
   const newStudent = req.body;
   const id = generateUniqueId(); // Gere um ID exclusivo para o novo aluno
   newStudent.id = id; // Adicione o ID ao objeto do aluno
@@ -71,7 +49,7 @@ app.post("/students", verifyToken, (req, res) => {
   res.status(201).json(newStudent);
 });
 
-app.put("/students/:id", verifyToken, (req, res) => {
+app.put("/students/:id", (req, res) => {
   const id = req.params.id;
   const updatedStudent = req.body;
   const students = readDataFromFile();
@@ -87,7 +65,7 @@ app.put("/students/:id", verifyToken, (req, res) => {
   }
 });
 
-app.delete("/students/:id", verifyToken, (req, res) => {
+app.delete("/students/:id", (req, res) => {
   const id = req.params.id;
   const students = readDataFromFile();
 
@@ -98,17 +76,6 @@ app.delete("/students/:id", verifyToken, (req, res) => {
     res.json({ message: "Aluno excluído com sucesso" });
   } else {
     res.status(404).json({ error: "Aluno não encontrado" });
-  }
-});
-
-// Rota de login
-app.post("/login", (req, res) => {
-  const { username, password } = req.body;
-  if (username === "admin" && password === "admin") {
-    const token = createToken();
-    res.json({ token });
-  } else {
-    res.status(401).json({ error: "Credenciais inválidas" });
   }
 });
 
