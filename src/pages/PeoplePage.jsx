@@ -197,15 +197,19 @@ const PeoplePage = () => {
       </div>
 
       <div style={{ marginBottom: "20px" }}>
-        <select value={filterYear} onChange={handleFilterYearChange}>
-          <option value="">Mostrar todos</option>
-          {turmaYears.map((year) => (
-            <option value={year} key={year}>
-              {year}
-            </option>
-          ))}
-        </select>
-      </div>
+  <select value={filterYear} onChange={handleFilterYearChange}>
+    <option value="">Mostrar todos</option>
+    {turmaYears
+      .slice() // Cria uma cópia do array para não modificar o original
+      .sort((a, b) => a - b) // Ordena os anos em ordem crescente
+      .map((year) => (
+        <option value={year} key={year}>
+          {year}
+        </option>
+      ))}
+  </select>
+</div>
+
 
       <Grid container spacing={3} paddingRight={"50px"} paddingTop={"50px"} paddingLeft={"50px"}>
         {filteredData.map((person, index) => (
