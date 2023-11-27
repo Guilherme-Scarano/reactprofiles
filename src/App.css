@@ -3,8 +3,11 @@
 }
 
 body{
-  background-color: #282c34;
-  display: flex;
+  background-color: #f0f0f0;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .App-logo {
@@ -20,7 +23,7 @@ body{
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  height: 100%;;
   display: flex;
   flex-direction: column;
   align-items: center;
