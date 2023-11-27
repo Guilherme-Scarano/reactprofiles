@@ -1,44 +1,74 @@
+/* index.css */
+
+/* Adicione um estilo geral para todos os cards */
+.card {
+  margin: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+
+/* Estilo específico para o header */
 header {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100px;
+  background-color: #333; /* Cor de fundo do header */
+  color: #fff; /* Cor do texto no header */
 }
 
 h1 {
-  position:relative;
+  position: relative;
   text-align: center;
-  color:aquamarine;
+  color: #333;
 }
 
-footer  {
-  position:relative;
+/* Estilo específico para o footer */
+footer {
+  position: fixed;
   left: 0;
   bottom: 0;
   font-size: 12px;
   width: 100%;
   color: aquamarine;
   text-align: center;
+  background-color: #333; /* Cor de fundo do footer */
+  padding: 10px 0; /* Espaçamento interno no footer */
 }
 
+/* Adicione bordas arredondadas às imagens em todo o aplicativo */
 img {
   border-radius: 50%;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
+/* Estilo para links dentro do componente PeopleCard */
 .PeopleCard a {
   text-decoration: none;
+  color: #4070f4; /* Cor dos links no componente PeopleCard */
+}
+
+/* Adicione um estilo para todos os botões no aplicativo */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilo específico para botões com a classe 'button' */
+.button {
+  background-color: #4070f4;
+  color: #fff;
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 35%; /* Ajuste conforme necessário */
+  width: 100%;
+  background-color: #4070f4;
 }

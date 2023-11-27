@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardActions from "@mui/material/CardActions";
+import TextField from "@mui/material/TextField";
 import axios from "axios";
 
 const img_styles = {
   media: {
-    height: 258,
-    width: 270,
-    paddingLeft: 50,
-    paddingRight:50,
-    paddingTop: 10,
+    height: 150,
+    width: 150,
+    borderRadius: "50%",
+    backgroundColor: "#fff",
+    padding: 3,
+    margin: "auto",
+    marginBottom: 10,
+    marginTop: 15,
+    cursor: "pointer",
   },
 };
 
 const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, studentId, handleDeleteStudent, handleEditStudent, isLoggedIn }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({ name, turma, email, photoUrl, linkedinUrl, id: studentId });
-  const [cardData, setCardData] = useState({ id: studentId, name, turma, email, photoUrl, linkedinUrl });
 
   const handleDeleteClick = async () => {
     try {
@@ -32,17 +35,8 @@ const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, studentId, hand
     }
   };
 
-  const handleShare = async (name, url) => {
-    try {
-      await navigator.share({
-        title: "Compartilhar",
-        text: `Confira ${name} no LinkedIn!`,
-        url: url,
-      });
-      console.log("Conteúdo compartilhado com sucesso!");
-    } catch (error) {
-      console.error("Erro ao compartilhar:", error);
-    }
+  const handleEmailClick = () => {
+    window.location.href = `mailto:${email}`;
   };
 
   const handleEditClick = () => {
@@ -51,96 +45,199 @@ const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, studentId, hand
 
   const handleSaveClick = async () => {
     try {
-      await handleEditStudent(studentId, editedData); // Realize a edição no servidor
-
-      // Após uma edição bem-sucedida, atualize o estado local com os novos dados editados
-      setCardData(editedData);
-
+      await handleEditStudent(studentId, editedData);
       setIsEditing(false);
     } catch (error) {
       console.error("Erro ao editar aluno:", error);
     }
   };
 
+  const handleShare = async () => {
+    // Lógica de compartilhamento
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: "Compartilhar",
+          text: `Confira ${name} no LinkedIn!`,
+          url: linkedinUrl,
+        });
+        console.log("Conteúdo compartilhado com sucesso!");
+      } else {
+        console.log("Compartilhamento não suportado. Implementando fallback...");
+
+        // Exibir uma mensagem indicando que a opção não é suportada
+        alert("Opção de compartilhamento não suportada pelo navegador.");
+      }
+    } catch (error) {
+      console.error("Erro ao compartilhar:", error);
+    }
+  };
+
   return (
-    <Card sx={{ minWidth: 210, maxWidth: 380, minHeight: 420 }} className="PeopleCard">
-      {isEditing ? (
-        <div>
-          <CardMedia component="img" style={img_styles.media} image={photoUrl} alt={name} />
-        </div>
-      ) : (
-        <a href={`mailto:${email}`} target="_blank" rel="noreferrer">
-          <CardActionArea title="Clique para enviar e-mail">
-            <CardMedia component="img" style={img_styles.media} image={photoUrl} alt={name} />
-          </CardActionArea>
-        </a>
-      )}
+    <Card sx={{ minWidth: 390, maxWidth: 390, minHeight: 440, position: "relative", borderRadius: "5%" }} className="PeopleCard">
+      <div className="cover" />
+      <CardMedia
+        title="Clique para enviar e-mail"
+        component="img"
+        style={{
+          ...img_styles.media,
+          marginTop: 20,
+          zIndex: 1,
+          position: "relative",
+          border: "4px solid #4070f4",
+        }}
+        image={photoUrl}
+        alt={name}
+        onClick={handleEmailClick}
+      />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div" color="blue" textAlign="center">
-          {isEditing ? (
-            <input
-              type="text"
+      <Typography gutterBottom variant="h5" component="div" textAlign="center" style={{ fontSize: "1.4rem" }}>
+        {isEditing ? (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <TextField
+              label="Nome"
+              variant="outlined"
+              size="small"
               value={editedData.name}
               onChange={(e) => setEditedData({ ...editedData, name: e.target.value })}
+              style={{ marginBottom: "10px", width: "100%" }}
             />
-          ) : (
-            name
-          )}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          <b>Turma:</b>{" "}
-          {isEditing ? (
-            <input
-              type="text"
+            <TextField
+              label="Turma"
+              variant="outlined"
+              size="small"
               value={editedData.turma}
               onChange={(e) => setEditedData({ ...editedData, turma: e.target.value })}
+              style={{ marginBottom: "10px", width: "100%" }}
             />
-          ) : (
-            turma
-          )}{" "}
-          <br />
-          <b>Email:</b>{" "}
-          {isEditing ? (
-            <input
-              type="text"
+            <TextField
+              label="Email"
+              variant="outlined"
+              size="small"
               value={editedData.email}
               onChange={(e) => setEditedData({ ...editedData, email: e.target.value })}
+              style={{ marginBottom: "10px", width: "100%" }}
             />
-          ) : (
-            email
-          )}
-        </Typography>
+          </div>
+        ) : (
+          <><b>{name}</b></>
+        )}
+      </Typography>
+      <Typography variant="body2" color="text.secondary" textAlign="center" style={{ fontSize: "1rem"}}>
+        {!isEditing && (
+          <>
+            <b>Turma:</b> {turma} <br />
+            <b>Email:</b> {email}
+          </>
+        )}
+      </Typography>
       </CardContent>
-      <CardActions sx={{ justifyContent: "center" }}>
-  {isLoggedIn && isEditing ? (
-    <Button size="small" color="primary" onClick={handleSaveClick}>
-      Salvar
-    </Button>
-  ) : (
-    isLoggedIn && (
-      <Button size="small" color="secondary" onClick={handleDeleteClick}>
-        Excluir
-      </Button>
-    )
-  )}
-  {isLoggedIn && isEditing ? (
-    <Button size="small" onClick={() => setIsEditing(false)}>
-      Cancelar
-    </Button>
-  ) : (
-    isLoggedIn && (
-      <Button size="small" color="primary" onClick={handleEditClick}>
-        Editar
-      </Button>
-    )
-  )}
-  <Button size="small" color="primary" onClick={() => handleShare(name, linkedinUrl)}>
-    Compartilhar
-  </Button>
-  <a href={linkedinUrl} target="_blank">
-    <Button size="small">LinkedIn</Button>
-  </a>
-</CardActions>
+      <Grid container justifyContent="center" spacing={1} alignItems="center">
+        {isLoggedIn && isEditing ? (
+          <>
+            <Grid item>
+              <Button
+                size="small"
+                style={{
+                  backgroundColor: "#4070f4",
+                  color: "white",
+                  borderRadius: "20px",
+                  marginRight: "8px", // Adicionei a propriedade marginRight
+                  marginBottom: "20px", // Adiciona margem inferior
+                }}
+                onClick={handleSaveClick}
+              >
+                Salvar
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                size="small"
+                style={{
+                  backgroundColor: "red",
+                  color: "white",
+                  borderRadius: "20px",
+                  marginBottom: "20px", // Adiciona margem inferior
+                }}
+                onClick={() => setIsEditing(false)}
+              >
+                Cancelar
+              </Button>
+            </Grid>
+          </>
+        ) : (
+          isLoggedIn && (
+            <Grid item>
+              <Button
+                size="small"
+                style={{
+                  backgroundColor: "#4070f4",
+                  color: "white",
+                  borderRadius: "20px",
+                  marginRight: "8px", // Adicionei a propriedade marginRight
+                  marginTop: "30px"
+                }}
+                onClick={handleEditClick}
+              >
+                Editar
+              </Button>
+            </Grid>
+          )
+        )}
+        {(isLoggedIn || linkedinUrl) && !isEditing && (
+          <>
+            <Grid item>
+              <Button
+                size="small"
+                style={{
+                  backgroundColor: "#4070f4",
+                  color: "white",
+                  borderRadius: "15px",
+                  marginRight: "8px", // Adicionei a propriedade marginRight
+                  marginTop: "30px"
+                }}
+                onClick={handleShare}
+              >
+                Compartilhar
+              </Button>
+            </Grid>
+            {linkedinUrl && (
+              <Grid item>
+                <a href={linkedinUrl} target="_blank" rel="noreferrer">
+                  <Button
+                    size="small"
+                    style={{
+                      backgroundColor: "#4070f4",
+                      color: "white",
+                      borderRadius: "20px",
+                      marginRight: "8px",
+                      marginTop: "30px"
+                    }}
+                  >
+                    LinkedIn
+                  </Button>
+                </a>
+              </Grid>
+            )}
+          </>
+        )}
+        {isLoggedIn && !isEditing && (
+          <Grid item>
+            <Button
+              size="small"
+              style={{
+                backgroundColor: "red",
+                color: "white",
+                borderRadius: "20px",
+                marginTop: "30px"
+              }}
+              onClick={handleDeleteClick}
+            >
+              Excluir
+            </Button>
+          </Grid>
+        )}
+      </Grid>
     </Card>
   );
 };

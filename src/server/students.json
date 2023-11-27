@@ -9,40 +9,16 @@
   },
   {
     "name": "Fer",
-    "turma": "2016",
+    "turma": "2017",
     "email": "fernando@gmail.com",
     "photoUrl": "https://cdn.espn.com.br/image/wide/622_158b2857-edbe-3b20-8a48-7ccae890b883.jpg",
     "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
     "id": "le7vr0td8elodd11up"
   },
   {
-    "name": "Professor",
-    "turma": "2013",
-    "email": "confianoverdadeiro@gmail.com",
-    "photoUrl": "https://th.bing.com/th/id/OIP.ADnMEfRzi0VLTAvVWzFVVwHaJ5?pid=ImgDet&rs=1",
-    "linkedinUrl": "https://www.linkedin.com/in/linustorvalds",
-    "id": "hxm6qnpdz24loma2xtn"
-  },
-  {
-    "name": "obg Senhor",
-    "turma": "2015",
-    "email": "finalmente@gmail.com",
-    "photoUrl": "https://media.semprefamilia.com.br/semprefamilia/2016/08/9bbgswfw-9bba946c.jpg",
-    "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
-    "id": "shwkjf30b6clop8jdrr"
-  },
-  {
-    "name": "teste",
-    "turma": "2015",
-    "email": "teste@gmail.com",
-    "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bill_Gates_2018.jpg/640px-Bill_Gates_2018.jpg",
-    "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
-    "id": "1jq6eiyc24bloxd3xdk"
-  },
-  {
-    "name": "teste2",
-    "turma": "2019",
-    "email": "teste2@gmail.com",
+    "name": "teste35",
+    "turma": "2020",
+    "email": "teste35@gmail.com",
     "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bill_Gates_2018.jpg/640px-Bill_Gates_2018.jpg",
     "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
     "id": "6tftzz3pm0wloxdbyfi"
@@ -54,5 +30,37 @@
     "photoUrl": "https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/10/07/2044188528-soteldo-provocacaoeasy-resizecom-aspect-ratio-512-320-7.jpg",
     "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
     "id": "oabhj1ltfzloxok9uh"
+  },
+  {
+    "name": "FalleNN",
+    "turma": "2011",
+    "email": "fallenzitos@gmail.com",
+    "photoUrl": "https://th.bing.com/th/id/R.c7ca709584ab0acd9a45adc3527f0793?rik=spFRzLUus5hHXg&riu=http%3a%2f%2fstatic.hltv.org%2fimages%2fgalleries%2f2239-medium%2f1258026960.12.jpeg&ehk=HS%2fJz%2faAbnnW01R%2fkvWFbUlLMxEyGvGzAmyIql1ZbXs%3d&risl=&pid=ImgRaw&r=0",
+    "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
+    "id": "e4t7bqlfgglp4ueugq"
+  },
+  {
+    "name": "Fallenzitos",
+    "turma": "2011",
+    "email": "fallenzitos@gmail.com",
+    "photoUrl": "https://th.bing.com/th/id/R.c7ca709584ab0acd9a45adc3527f0793?rik=spFRzLUus5hHXg&riu=http%3a%2f%2fstatic.hltv.org%2fimages%2fgalleries%2f2239-medium%2f1258026960.12.jpeg&ehk=HS%2fJz%2faAbnnW01R%2fkvWFbUlLMxEyGvGzAmyIql1ZbXs%3d&risl=&pid=ImgRaw&r=0",
+    "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
+    "id": "xd3bf3294zlpdc0b8q"
+  },
+  {
+    "name": "Luiz Felipe",
+    "turma": "2011",
+    "email": "fallenzitos@gmail.com",
+    "photoUrl": "https://th.bing.com/th/id/R.c7ca709584ab0acd9a45adc3527f0793?rik=spFRzLUus5hHXg&riu=http%3a%2f%2fstatic.hltv.org%2fimages%2fgalleries%2f2239-medium%2f1258026960.12.jpeg&ehk=HS%2fJz%2faAbnnW01R%2fkvWFbUlLMxEyGvGzAmyIql1ZbXs%3d&risl=&pid=ImgRaw&r=0",
+    "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
+    "id": "jek31eccvarlpdepfoj"
+  },
+  {
+    "name": "Gabe",
+    "turma": "2021",
+    "email": "gabe@gmail.com",
+    "photoUrl": "https://th.bing.com/th/id/OIP.tgeR_h53atiXrOw-XXCWRAHaEK?rs=1&pid=ImgDetMain",
+    "linkedinUrl": "https://www.linkedin.com/in/linustorvalds",
+    "id": "ng8j2i4tc4llphbe94q"
   }
 ]
