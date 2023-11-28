@@ -1,50 +1,42 @@
 [
   {
-    "name": "Fallen Pós Major",
-    "turma": "2012",
-    "email": "fallenprime@gmail.com",
-    "photoUrl": "https://th.bing.com/th/id/OIP.EhTrxSu_BLewB4nvonW7jQHaE8?pid=ImgDet&rs=1",
-    "linkedinUrl": "https://www.linkedin.com/in/linustorvalds",
-    "id": "u4lzdisfc8locc3m9c"
-  },
-  {
-    "name": "Fer",
-    "turma": "2017",
-    "email": "fernando@gmail.com",
-    "photoUrl": "https://cdn.espn.com.br/image/wide/622_158b2857-edbe-3b20-8a48-7ccae890b883.jpg",
+    "name": "Bill Gates",
+    "turma": "2020",
+    "email": "billgates@gmail.com",
+    "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bill_Gates_2018.jpg/640px-Bill_Gates_2018.jpg",
     "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
-    "id": "le7vr0td8elodd11up"
+    "id": "p83yubkp1olpillqnq"
   },
   {
-    "name": "Fallenzitos",
-    "turma": "2011",
-    "email": "fallenzitos@gmail.com",
-    "photoUrl": "https://th.bing.com/th/id/R.c7ca709584ab0acd9a45adc3527f0793?rik=spFRzLUus5hHXg&riu=http%3a%2f%2fstatic.hltv.org%2fimages%2fgalleries%2f2239-medium%2f1258026960.12.jpeg&ehk=HS%2fJz%2faAbnnW01R%2fkvWFbUlLMxEyGvGzAmyIql1ZbXs%3d&risl=&pid=ImgRaw&r=0",
-    "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
-    "id": "xd3bf3294zlpdc0b8q"
+    "name": "Mark Zuckerberg",
+    "turma": "2021",
+    "email": "mark@gmail.com",
+    "photoUrl": "https://t.ctcdn.com.br/i6Vx205hT_5Q7kGJs4Y_T6mDfq8=/640x360/smart/i764018.png",
+    "linkedinUrl": "https://www.linkedin.com/in/mark-zuckerberg-618bba58",
+    "id": "7aflfsxnpflpilniua"
   },
   {
-    "name": "Neymar Jr",
-    "turma": "2010",
-    "email": "ney2010@gmail.com",
-    "photoUrl": "https://media.semprefamilia.com.br/semprefamilia/2016/08/9bbgswfw-9bba946c.jpg",
-    "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
-    "id": "hhlih6hte8mlphp2ns2"
+    "name": "Elon Musk",
+    "turma": "2021",
+    "email": "elon@gmail.com",
+    "photoUrl": "https://t.ctcdn.com.br/l6bbiLB1NRfBnVz5xJxDhTDPixE=/640x360/smart/i742768.jpeg",
+    "linkedinUrl": "https://br.linkedin.com/company/spacex",
+    "id": "l38o7xyfm7lpilozws"
   },
   {
-    "name": "Iran",
+    "name": "Melinda Gates",
+    "turma": "2022",
+    "email": "melinda@gmail.com",
+    "photoUrl": "https://www.gatesfoundation.org/-/media/gfo/3about/3people/ga275589_melinda_gates_0001.jpg",
+    "linkedinUrl": "https://www.linkedin.com/in/melindagates",
+    "id": "u1vmaw53uvlpilqb5b"
+  },
+  {
+    "name": "Jeff Bezos",
     "turma": "2023",
-    "email": "receba@gmail.com",
-    "photoUrl": "https://conteudo.imguol.com.br/c/esporte/60/2022/08/03/iran-santana-o-luva-de-pedreiro-1659552598392_v2_450x600.jpg.webp",
-    "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
-    "id": "1i5vdmhvovpilphp3fo4"
-  },
-  {
-    "name": "Manoel",
-    "turma": "2023",
-    "email": "bluepen2023@gmail.com",
-    "photoUrl": "https://odia.ig.com.br/_midias/jpg/2023/05/24/385x420/1_azul_caneta-29197997.jpg",
-    "linkedinUrl": "https://www.linkedin.com/in/williamhgates",
-    "id": "e8yz1gcvcndlphp43lk"
+    "email": "jeff@gmail.com",
+    "photoUrl": "https://investidorsardinha.r7.com/wp-content/uploads/2020/09/jeff-bezos-a-historia-do-homem-mais-rico-do-mundo-1-scaled.jpg",
+    "linkedinUrl": "https://br.linkedin.com/company/amazon",
+    "id": "0n37044gcyldlpils8jx"
   }
 ]
