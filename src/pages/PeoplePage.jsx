@@ -22,6 +22,7 @@ const PeoplePage = () => {
 
   const [isAddingStudent, setIsAddingStudent] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const fetchStudents = async () => {
     try {
@@ -96,6 +97,12 @@ const PeoplePage = () => {
     setPeopleData((prevData) => prevData.filter((person) => person.id !== studentId));
   };
 
+  const handleLogout = () => {
+    // ... outros códigos ...
+    setIsAddingStudent(false); // Adicione esta linha para fechar o formulário de adição
+    // ... outros códigos ...
+  };
+
   const handleFilterYearChange = (event) => {
     setFilterYear(event.target.value);
   };
@@ -110,10 +117,15 @@ const PeoplePage = () => {
 
   return (
     <div>
-      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} openAddStudentForm={openAddStudentForm} />
+      <Header
+  isLoggedIn={isLoggedIn}
+  setIsLoggedIn={setIsLoggedIn}
+  openAddStudentForm={openAddStudentForm}
+  setIsAddingStudent={setIsAddingStudent}  // Certifique-se de passar a função corretamente
+/>
 
       <div style={{ marginBottom: "20px", marginTop: "50px", textAlign: "center" }}>
-        <h1 style={{ margin: 0, color: "#333", fontSize: "45px" }}>Egressos - SI</h1>
+        <h1 style={{ margin: 0, color: "#333", fontSize: "45px" }}>ConectaSI</h1>
       </div>
 
       <div style={{ marginBottom: "20px", textAlign: "center", marginTop: "20px" }}>
@@ -218,8 +230,35 @@ const PeoplePage = () => {
         </div>
       )}
 
-    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
-      {peopleData
+<div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
+  {peopleData
+    .filter((person) => (
+      person.name.toLowerCase().includes(searchTerm) ||
+      person.email.toLowerCase().includes(searchTerm) ||
+      person.turma.toLowerCase().includes(searchTerm)
+    ))
+    .filter((person) => (
+      filterYear === "" || person.turma.toString() === filterYear
+    ))
+    .map((person, index) => (
+      <div style={{ flex: "0 0 auto", minWidth: "300px", maxWidth: "400px", marginBottom: "20px", marginTop: "20px" }} key={index}>
+        <PeopleCard
+          name={person.name}
+          turma={person.turma}
+          email={person.email}
+          photoUrl={person.photoUrl}
+          linkedinUrl={person.linkedinUrl}
+          compartilhar={person.compartilhar}
+          studentId={person.id}
+          handleDeleteStudent={handleDeleteStudent}
+          handleEditStudent={handleEditStudent}
+          isLoggedIn={isLoggedIn}
+          setIsEditing={setIsEditing}  // Certifique-se de passar a função corretamente
+        />
+      </div>
+    ))}
+  {peopleData.length > 0 && // Verifica se há dados após a filtragem
+    peopleData
       .filter((person) => (
         person.name.toLowerCase().includes(searchTerm) ||
         person.email.toLowerCase().includes(searchTerm) ||
@@ -228,23 +267,10 @@ const PeoplePage = () => {
       .filter((person) => (
         filterYear === "" || person.turma.toString() === filterYear
       ))
-      .map((person, index) => (
-        <div style={{ flex: "0 0 auto", minWidth: "300px", maxWidth: "400px", marginBottom: "20px", marginTop: "20px" }} key={index}>
-          <PeopleCard
-            name={person.name}
-            turma={person.turma}
-            email={person.email}
-            photoUrl={person.photoUrl}
-            linkedinUrl={person.linkedinUrl}
-            compartilhar={person.compartilhar}
-            studentId={person.id}
-            handleDeleteStudent={handleDeleteStudent}
-            handleEditStudent={handleEditStudent}
-            isLoggedIn={isLoggedIn}
-          />
-        </div>
-      ))}
-    </div>
+      .length === 0 && ( // Verifica se não há resultados após a filtragem
+      <p style={{ textAlign: "center", marginTop: "20px" }}>Não foi encontrado nenhum resultado.</p>
+    )}
+</div>
 
     </div>
   );

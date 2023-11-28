@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LoginPage from "./LoginPage";
 import logoImage from "../img/iflogobranco.png";
 
-const Header = ({ isLoggedIn, setIsLoggedIn, openAddStudentForm }) => {
+const Header = ({  isLoggedIn, setIsLoggedIn, openAddStudentForm, setIsAddingStudent }) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
 
   const handleLoginButtonClick = () => {
@@ -16,6 +16,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, openAddStudentForm }) => {
   const handleLogout = () => {
     setShowLoginForm(false);
     setIsLoggedIn(false);
+    setIsAddingStudent(false); // Adicione esta linha para fechar o formulário de adição
     sessionStorage.setItem("isLoggedIn", "false");
   };
 

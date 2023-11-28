@@ -73,6 +73,11 @@ const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, studentId, hand
     }
   };
 
+  const handleLogout = () => {
+    setIsEditing(false); // Adicione esta linha para cancelar a edição
+    // ... outros códigos ...
+  };
+
   return (
     <Card sx={{ minWidth: 390, maxWidth: 390, minHeight: 440, position: "relative", borderRadius: "5%" }} className="PeopleCard">
       <div className="cover" />
