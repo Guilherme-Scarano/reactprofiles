@@ -28,7 +28,7 @@ const PeopleCard = ({ name, turma, email, photoUrl, linkedinUrl, studentId, hand
 
   const handleDeleteClick = async () => {
     try {
-      await axios.delete(`http://localhost:3000/students/${studentId}`);
+      await axios.delete(`https://json-serverp.onrender.com/students/${studentId}`);
       handleDeleteStudent(studentId);
     } catch (error) {
       console.error("Erro ao excluir aluno:", error);

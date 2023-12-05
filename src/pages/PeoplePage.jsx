@@ -27,7 +27,13 @@ const PeoplePage = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get("https://json-serverp.onrender.com/students");
-      setPeopleData(response.data);
+      const responseData = response.data;
+
+      if (Array.isArray(responseData)) {
+        setPeopleData(responseData);
+      } else {
+        console.error("Formato de dados da API inválido");
+      }
     } catch (error) {
       console.error("Erro ao buscar alunos:", error);
     }
@@ -52,7 +58,7 @@ const PeoplePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post("https://json-serverp.onrender.com/students", newStudent);
       setNewStudent({
@@ -66,8 +72,11 @@ const PeoplePage = () => {
       setIsAddingStudent(false);
     } catch (error) {
       console.error("Erro ao adicionar aluno:", error);
+      console.log(error.response);
+      console.log("Detalhes do erro:", error.response.data);
     }
   };
+  
 
   const handleEditStudent = async (studentId, updateData) => {
     try {
