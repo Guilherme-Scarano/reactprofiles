@@ -26,7 +26,7 @@ const PeoplePage = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/students");
+      const response = await axios.get("https://json-serverp.onrender.com/students");
       setPeopleData(response.data);
     } catch (error) {
       console.error("Erro ao buscar alunos:", error);
@@ -54,7 +54,7 @@ const PeoplePage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3000/students", newStudent);
+      const response = await axios.post("https://json-serverp.onrender.com/students", newStudent);
       setNewStudent({
         name: "",
         turma: "",
@@ -71,7 +71,7 @@ const PeoplePage = () => {
 
   const handleEditStudent = async (studentId, updateData) => {
     try {
-      const response = await axios.put(`http://localhost:3000/students/${studentId}`, updateData);
+      const response = await axios.put(`https://json-serverp.onrender.com/students/${studentId}`, updateData);
 
       const updatedData = peopleData.map((person) => {
         if (person.id === studentId) {
