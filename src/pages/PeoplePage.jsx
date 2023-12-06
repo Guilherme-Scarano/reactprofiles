@@ -151,10 +151,11 @@ const PeoplePage = () => {
   openAddStudentForm={openAddStudentForm}
   setIsAddingStudent={setIsAddingStudent}  // Certifique-se de passar a função corretamente
 />
-
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center",  height: "200px", marginTop: "20px"}}>
-      <img src={logoSI} alt="Logo" style={{ width: "350px", height: "auto", marginTop: "20px" }} />
-    </div>
+    <a href="ifmachadoegressos.vercel.app" style={{ textDecoration: "none", color: "inherit" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center",  height: "200px", marginTop: "20px"}}>
+          <img src={logoSI} alt="Logo" style={{ width: "350px", height: "auto", marginTop: "20px" }} />
+        </div>
+    </a>
 
       <div style={{ marginTop: "20px", marginBottom: "20px", textAlign: "center" }}>
         <input
