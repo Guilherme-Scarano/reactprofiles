@@ -5,6 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import PeopleCard from "../components/PeopleCard";
+import LoadingSpinner from "../components/LoadingSpinner";
 import axios from "axios";
 import Header from "../components/Header";
 import logoSI from "../img/logo-SI2.png";
@@ -26,11 +27,13 @@ const PeoplePage = () => {
   const [isAddingStudent, setIsAddingStudent] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Adiciona o estado de loading
 
-  const fetchStudents = async () => {
+   const fetchStudents = async () => {
     try {
+      setIsLoading(true); // Ativa o loading antes de iniciar a requisição
       const response = await axios.get("https://json-serverp.onrender.com/students");
-      const responseData = response.data.transactions; 
+      const responseData = response.data.transactions;
 
       console.log("Resposta da API:", responseData); // Adiciona esta linha
 
@@ -41,6 +44,8 @@ const PeoplePage = () => {
       }
     } catch (error) {
       console.error("Erro ao buscar alunos:", error);
+    } finally {
+      setIsLoading(false); // Desativa o loading, independentemente do resultado
     }
   };
 
@@ -143,8 +148,6 @@ const PeoplePage = () => {
     setIsAddingStudent(true);
   };
 
-  // Use filteredPeople no lugar de peopleData para mapear ou exibir os dados, onde for necessário
-
   return (
     <div>
       <Header
@@ -153,6 +156,7 @@ const PeoplePage = () => {
   openAddStudentForm={openAddStudentForm}
   setIsAddingStudent={setIsAddingStudent}  // Certifique-se de passar a função corretamente
 />
+
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center",  height: "200px", marginTop: "20px"}}>
           <a href="conectasi.vercel.app" style={{ textDecoration: "none", color: "inherit" }}>
             <img src={logoSI} alt="Logo" style={{ width: "350px", height: "auto", marginTop: "20px" }} />
@@ -176,6 +180,7 @@ const PeoplePage = () => {
           }}
         />
       </div>
+
 
       {isAddingStudent ? (
         <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
@@ -272,50 +277,52 @@ const PeoplePage = () => {
         </div>
       )}
 
-<div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
-  {peopleData
-    .filter((person) => (
-      person.name.toLowerCase().includes(searchTerm) ||
-      person.email.toLowerCase().includes(searchTerm) ||
-      person.turma.toLowerCase().includes(searchTerm)
-    ))
-    .filter((person) => (
-      filterYear === "" || person.turma.toString() === filterYear
-    ))
-    .map((person, index) => (
-      <div style={{ flex: "0 0 auto", minWidth: "300px", maxWidth: "400px", marginBottom: "20px", marginTop: "20px" }} key={index}>
-        <PeopleCard
-          name={person.name}
-          turma={person.turma}
-          email={person.email}
-          photoUrl={person.photoUrl}
-          linkedinUrl={person.linkedinUrl}
-          compartilhar={person.compartilhar}
-          studentId={person.id}
-          handleDeleteStudent={handleDeleteStudent}
-          handleEditStudent={handleEditStudent}
-          isLoggedIn={isLoggedIn}
-          setIsEditing={setIsEditing}  // Certifique-se de passar a função corretamente
-        />
-      </div>
-    ))}
-  {peopleData.length > 0 && // Verifica se há dados após a filtragem
-    peopleData
-      .filter((person) => (
-        person.name.toLowerCase().includes(searchTerm) ||
-        person.email.toLowerCase().includes(searchTerm) ||
-        person.turma.toLowerCase().includes(searchTerm)
-      ))
-      .filter((person) => (
-        filterYear === "" || person.turma.toString() === filterYear
-      ))
-      .length === 0 && ( // Verifica se não há resultados após a filtragem
-      <p style={{ textAlign: "center", marginTop: "20px" }}>Não foi encontrado nenhum resultado.</p>
-    )}
-</div>
+      {isLoading && <LoadingSpinner />} {/* Adiciona o componente LoadingSpinner aqui */}  
 
+    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
+      {peopleData
+        .filter((person) => (
+          person.name.toLowerCase().includes(searchTerm) ||
+          person.email.toLowerCase().includes(searchTerm) ||
+          person.turma.toLowerCase().includes(searchTerm)
+        ))
+        .filter((person) => (
+          filterYear === "" || person.turma.toString() === filterYear
+        ))
+        .map((person, index) => (
+          <div style={{ flex: "0 0 auto", minWidth: "300px", maxWidth: "400px", marginBottom: "20px", marginTop: "20px" }} key={index}>
+            <PeopleCard
+              name={person.name}
+              turma={person.turma}
+              email={person.email}
+              photoUrl={person.photoUrl}
+              linkedinUrl={person.linkedinUrl}
+              compartilhar={person.compartilhar}
+              studentId={person.id}
+              handleDeleteStudent={handleDeleteStudent}
+              handleEditStudent={handleEditStudent}
+              isLoggedIn={isLoggedIn}
+              setIsEditing={setIsEditing}  // Certifique-se de passar a função corretamente
+            />
+          </div>
+        ))}
+      {peopleData.length > 0 && // Verifica se há dados após a filtragem
+        peopleData
+          .filter((person) => (
+            person.name.toLowerCase().includes(searchTerm) ||
+            person.email.toLowerCase().includes(searchTerm) ||
+            person.turma.toLowerCase().includes(searchTerm)
+          ))
+          .filter((person) => (
+            filterYear === "" || person.turma.toString() === filterYear
+          ))
+          .length === 0 && ( // Verifica se não há resultados após a filtragem
+          <p style={{ textAlign: "center", marginTop: "20px" }}>Não foi encontrado nenhum resultado.</p>
+        )}
     </div>
-  );
-};
+
+        </div>
+      );
+    };
 
 export default PeoplePage;
