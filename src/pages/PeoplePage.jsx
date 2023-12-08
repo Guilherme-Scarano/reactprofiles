@@ -8,6 +8,8 @@ import PeopleCard from "../components/PeopleCard";
 import axios from "axios";
 import Header from "../components/Header";
 import logoSI from "../img/logo-SI2.png";
+import { Button as BootstrapButton, Dropdown } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const PeoplePage = () => {
   const [peopleData, setPeopleData] = useState([]);
@@ -151,11 +153,11 @@ const PeoplePage = () => {
   openAddStudentForm={openAddStudentForm}
   setIsAddingStudent={setIsAddingStudent}  // Certifique-se de passar a função corretamente
 />
-    <a href="ifmachadoegressos.vercel.app" style={{ textDecoration: "none", color: "inherit" }}>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center",  height: "200px", marginTop: "20px"}}>
-          <img src={logoSI} alt="Logo" style={{ width: "350px", height: "auto", marginTop: "20px" }} />
+          <a href="conectasi.vercel.app" style={{ textDecoration: "none", color: "inherit" }}>
+            <img src={logoSI} alt="Logo" style={{ width: "350px", height: "auto", marginTop: "20px" }} />
+          </a>
         </div>
-    </a>
 
       <div style={{ marginTop: "20px", marginBottom: "20px", textAlign: "center" }}>
         <input
@@ -245,17 +247,28 @@ const PeoplePage = () => {
         </div>
       ) : (
         <div style={{ marginBottom: "20px", marginLeft: "5px" }}>
-          <select value={filterYear} onChange={handleFilterYearChange}>
-            <option value="">Mostrar todos</option>
-            {turmaYears
-              .slice() // Cria uma cópia do array para não modificar o original
-              .sort((a, b) => a - b) // Ordena os anos em ordem crescente
-              .map((year) => (
-                <option value={year} key={year}>
-                  {year}
-                </option>
-              ))}
-          </select>
+          <Dropdown>
+            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+              {filterYear === "" ? "Mostrar todos" : filterYear}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => handleFilterYearChange({ target: { value: "" } })}>
+                Mostrar todos
+              </Dropdown.Item>
+              {turmaYears
+                .slice()
+                .sort((a, b) => a - b)
+                .map((year) => (
+                  <Dropdown.Item
+                    key={year}
+                    onClick={() => handleFilterYearChange({ target: { value: year } })}
+                  >
+                    {year}
+                  </Dropdown.Item>
+                ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       )}
 
