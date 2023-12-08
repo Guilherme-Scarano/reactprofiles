@@ -154,7 +154,7 @@ const PeoplePage = () => {
   setIsAddingStudent={setIsAddingStudent}  // Certifique-se de passar a função corretamente
 />
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center",  height: "200px", marginTop: "20px"}}>
-          <a href="https://conectasi.vercel.app/" style={{ textDecoration: "none", color: "inherit" }}>
+          <a href="/" style={{ textDecoration: "none", color: "inherit" }}>
             <img src={logoSI} alt="Logo" style={{ width: "350px", height: "auto", marginTop: "20px" }} />
           </a>
         </div>
