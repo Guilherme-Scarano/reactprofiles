@@ -7,6 +7,9 @@ import Button from "@mui/material/Button";
 import PeopleCard from "../components/PeopleCard";
 import axios from "axios";
 import Header from "../components/Header";
+import logoSI from "../img/logo-SI2.png";
+import { Button as BootstrapButton, Dropdown } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const PeoplePage = () => {
   const [peopleData, setPeopleData] = useState([]);
@@ -27,7 +30,9 @@ const PeoplePage = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get("https://json-serverp.onrender.com/students");
-      const responseData = response.data;
+      const responseData = response.data.transactions; 
+
+      console.log("Resposta da API:", responseData); // Adiciona esta linha
 
       if (Array.isArray(responseData)) {
         setPeopleData(responseData);
@@ -72,28 +77,44 @@ const PeoplePage = () => {
       setIsAddingStudent(false);
     } catch (error) {
       console.error("Erro ao adicionar aluno:", error);
-      console.log(error.response);
-      console.log("Detalhes do erro:", error.response.data);
+  
+      if (error.response) {
+        // O servidor respondeu com um código de erro
+        console.error("Detalhes do erro:", error.response.status);
+        console.error("Mensagem de erro do servidor:", error.response.data);
+      } else if (error.request) {
+        // A requisição foi feita, mas não houve resposta do servidor
+        console.error("Sem resposta do servidor");
+      } else {
+        // Algo aconteceu ao configurar a solicitação
+        console.error("Erro ao configurar a solicitação:", error.message);
+      }
     }
   };
+  
   
 
   const handleEditStudent = async (studentId, updateData) => {
     try {
       const response = await axios.put(`https://json-serverp.onrender.com/students/${studentId}`, updateData);
-
-      const updatedData = peopleData.map((person) => {
-        if (person.id === studentId) {
-          return response.data;
-        }
-        return person;
-      });
-
-      setPeopleData(updatedData);
+  
+      if (response.status === 200) {
+        const updatedData = peopleData.map((person) => {
+          if (person.id === studentId) {
+            return { ...person, ...response.data }; // Use apenas response.data
+          }
+          return person;
+        });
+  
+        setPeopleData(updatedData);
+      } else {
+        console.error("Erro ao editar aluno - status não esperado:", response.status);
+      }
     } catch (error) {
       console.error("Erro ao editar aluno:", error);
     }
   };
+  
 
   const handleSearchChange = (event) => {
     const searchTermValue = event.target.value.toLowerCase();
@@ -132,12 +153,13 @@ const PeoplePage = () => {
   openAddStudentForm={openAddStudentForm}
   setIsAddingStudent={setIsAddingStudent}  // Certifique-se de passar a função corretamente
 />
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center",  height: "200px", marginTop: "20px"}}>
+          <a href="conectasi.vercel.app" style={{ textDecoration: "none", color: "inherit" }}>
+            <img src={logoSI} alt="Logo" style={{ width: "350px", height: "auto", marginTop: "20px" }} />
+          </a>
+        </div>
 
-      <div style={{ marginBottom: "20px", marginTop: "50px", textAlign: "center" }}>
-        <h1 style={{ margin: 0, color: "#333", fontSize: "45px" }}>ConectaSI</h1>
-      </div>
-
-      <div style={{ marginBottom: "20px", textAlign: "center", marginTop: "20px" }}>
+      <div style={{ marginTop: "20px", marginBottom: "20px", textAlign: "center" }}>
         <input
           type="text"
           placeholder="Pesquisar por nome, email ou turma"
@@ -225,17 +247,28 @@ const PeoplePage = () => {
         </div>
       ) : (
         <div style={{ marginBottom: "20px", marginLeft: "5px" }}>
-          <select value={filterYear} onChange={handleFilterYearChange}>
-            <option value="">Mostrar todos</option>
-            {turmaYears
-              .slice() // Cria uma cópia do array para não modificar o original
-              .sort((a, b) => a - b) // Ordena os anos em ordem crescente
-              .map((year) => (
-                <option value={year} key={year}>
-                  {year}
-                </option>
-              ))}
-          </select>
+          <Dropdown>
+            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+              {filterYear === "" ? "Mostrar todos" : filterYear}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => handleFilterYearChange({ target: { value: "" } })}>
+                Mostrar todos
+              </Dropdown.Item>
+              {turmaYears
+                .slice()
+                .sort((a, b) => a - b)
+                .map((year) => (
+                  <Dropdown.Item
+                    key={year}
+                    onClick={() => handleFilterYearChange({ target: { value: year } })}
+                  >
+                    {year}
+                  </Dropdown.Item>
+                ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       )}
 
