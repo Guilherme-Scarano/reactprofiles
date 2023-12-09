@@ -28,26 +28,33 @@ const PeoplePage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Adiciona o estado de loading
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [isAddingStudentLoading, setIsAddingStudentLoading] = useState(false);
 
-   const fetchStudents = async () => {
+
+  const fetchStudents = async () => {
     try {
-      setIsLoading(true); // Ativa o loading antes de iniciar a requisição
+      setIsLoading(true);
       const response = await axios.get("https://json-serverp.onrender.com/students");
-      const responseData = response.data.transactions;
-
-      console.log("Resposta da API:", responseData); // Adiciona esta linha
-
+      const responseData = response.data;
+  
+      console.log("Resposta da API:", responseData);
+  
       if (Array.isArray(responseData)) {
-        setPeopleData(responseData);
+        // Ordena os alunos por turma no frontend
+        const sortedStudents = responseData.slice().sort((a, b) => a.turma - b.turma);
+  
+        setPeopleData(sortedStudents);
       } else {
         console.error("Formato de dados da API inválido");
       }
     } catch (error) {
       console.error("Erro ao buscar alunos:", error);
     } finally {
-      setIsLoading(false); // Desativa o loading, independentemente do resultado
+      setIsLoading(false);
     }
   };
+  
 
   const handleCancelAddStudent = () => {
     setNewStudent({
@@ -61,16 +68,20 @@ const PeoplePage = () => {
   };
 
   useEffect(() => {
-    fetchStudents();
-    const storedLoginStatus = sessionStorage.getItem("isLoggedIn");
-    setIsLoggedIn(storedLoginStatus === "true");
+    const fetchData = async () => {
+      await fetchStudents();
+  
+      const storedLoginStatus = sessionStorage.getItem("isLoggedIn");
+      setIsLoggedIn(storedLoginStatus === "true");
+    };
+  
+    fetchData();
   }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-  
     try {
       const response = await axios.post("https://json-serverp.onrender.com/students", newStudent);
+  
       setNewStudent({
         name: "",
         turma: "",
@@ -78,8 +89,9 @@ const PeoplePage = () => {
         photoUrl: "",
         linkedinUrl: "",
       });
-      fetchStudents();
+  
       setIsAddingStudent(false);
+      fetchStudents();
     } catch (error) {
       console.error("Erro ao adicionar aluno:", error);
   
@@ -111,7 +123,10 @@ const PeoplePage = () => {
           return person;
         });
   
-        setPeopleData(updatedData);
+        // Ordena novamente após a atualização
+        const sortedData = updatedData.slice().sort((a, b) => a.turma - b.turma);
+  
+        setPeopleData(sortedData);
       } else {
         console.error("Erro ao editar aluno - status não esperado:", response.status);
       }
@@ -130,12 +145,7 @@ const PeoplePage = () => {
 
   const handleDeleteStudent = (studentId) => {
     setPeopleData((prevData) => prevData.filter((person) => person.id !== studentId));
-  };
-
-  const handleLogout = () => {
-    // ... outros códigos ...
-    setIsAddingStudent(false); // Adicione esta linha para fechar o formulário de adição
-    // ... outros códigos ...
+    window.location.href = "/";
   };
 
   const handleFilterYearChange = (event) => {
@@ -148,14 +158,14 @@ const PeoplePage = () => {
     setIsAddingStudent(true);
   };
 
-  return (
-    <div>
-      <Header
-  isLoggedIn={isLoggedIn}
-  setIsLoggedIn={setIsLoggedIn}
-  openAddStudentForm={openAddStudentForm}
-  setIsAddingStudent={setIsAddingStudent}  // Certifique-se de passar a função corretamente
-/>
+      return (
+        <div>
+          <Header
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        openAddStudentForm={openAddStudentForm}
+        setIsAddingStudent={setIsAddingStudent}  // Certifique-se de passar a função corretamente
+      />
 
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center",  height: "200px", marginTop: "20px"}}>
           <a href="/" style={{ textDecoration: "none", color: "inherit" }}>
